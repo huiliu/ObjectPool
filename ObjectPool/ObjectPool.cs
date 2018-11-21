@@ -11,18 +11,21 @@ namespace Arrow.Base
     {
         private Queue<T> Pool = new Queue<T>();
         private Func<T> Factory;
-        private Action Deposer;
         private int minExtendLength;
-        public ObjectPool(int minLength, int minExtendLength, Func<T> factory, Action deposer)
+        public ObjectPool(int minLength, int minExtendLength, Func<T> factory)
         {
             this.Factory =factory;
-            this.Deposer = deposer;
             this.minExtendLength = minExtendLength;
 
             for (var i = 0; i < minLength; ++i)
             {
                 this.Pool.Enqueue(this.Factory());
             }
+        }
+
+        public void CleanUp()
+        {
+            this.Pool.Clear();
         }
 
         public T Rent()

@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -27,15 +28,10 @@ namespace Arrow.Base.Tests
             return new ABC();
         }
 
-        void Deposer()
-        {
-
-        }
-
         [Fact]
         public void Test1()
         {
-            var pool = new ObjectPool<ABC>(8, 4, Factory, Deposer);
+            var pool = new ObjectPool<ABC>(8, 4, Factory);
             List<ABC> xx = new List<ABC>(10);
             for (var i = 0; i < 10; ++i)
                 xx.Add(pool.Rent());
@@ -45,3 +41,4 @@ namespace Arrow.Base.Tests
         }
     }
 }
+#endif
